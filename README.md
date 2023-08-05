@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 First Install All dependencies by Using 
-
+#### `npm install`
 ### Live Site LINK 
 
 https://tranquil-daffodil-e08cc2.netlify.app/
@@ -10,7 +10,7 @@ https://tranquil-daffodil-e08cc2.netlify.app/
 
 ## Hold the card and drag to your desire board
 
-#### `npm install`
+
 ## Available Scripts
 
 In the project directory, you can run:
