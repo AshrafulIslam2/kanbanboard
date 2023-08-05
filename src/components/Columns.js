@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Task } from "./Task";
+import { AddTaskModal } from "./AddTaskModal";
 
 const Columns = ({
   Column,
   kanbanBoardTask,
   handaleDragEnter,
   handaleDragEnd,
+  handelDragEnterForColumn,
+  setkanbanBoardTask,
+  handelDelete,
 }) => {
+  const [toogle, setToogle] = useState(false);
   return (
-    <div key={Column.title} className=" bg-slate-200 my-10 rounded-md">
+    <div
+      key={Column.title}
+      className=" bg-slate-200 my-10 rounded-md"
+      onDragEnter={() => handelDragEnterForColumn(Column.id)}
+    >
       <div className="relative">
         <h1
           className={`${
@@ -31,6 +40,13 @@ const Columns = ({
         >
           {Column.title}
         </h1>
+        {Column.title === "To Do" && toogle && (
+          <AddTaskModal
+            kanbanBoardTask={kanbanBoardTask}
+            setkanbanBoardTask={setkanbanBoardTask}
+            setToogle={setToogle}
+          />
+        )}
         {Column.title === "To Do" && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +54,8 @@ const Columns = ({
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="white"
-            className="w-6 h-6 absolute top-[8px] right-[8px]"
+            className="w-6 h-6 absolute top-[8px] right-[8px] transition-all duration-500 ease-in-out"
+            onClick={() => setToogle(!toogle)}
           >
             <path
               strokeWidth="round"
@@ -59,6 +76,7 @@ const Columns = ({
                 handaleDragEnter={handaleDragEnter}
                 handaleDragEnd={handaleDragEnd}
                 taskdetails={kanbanBoardTask.tasks[taskid]}
+                handelDelete={handelDelete}
               />
             ))
           : "no task found"}
